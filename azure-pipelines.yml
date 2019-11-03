@@ -45,27 +45,27 @@ steps:
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: |
-      **/*.dacpac
-      **/*.Commands.WebApi.zip
-      **/*.Events.WebApi.zip
-      **/*.Queries.WebApi.zip
-      **/*.UI.Web.zip
+      **\*.Commands.WebApi.zip
+      **\*.Events.WebApi.zip
+      **\*.Queries.WebApi.zip
+      **\*.UI.Web.zip
+      **\*.dacpac
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     flattenFolders: true
 
 - task: CopyFiles@2
-  displayName: Copy Utility
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/src/PokerLeagueManager.Utilties/bin/$(buildConfiguration)'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/Utility'
-
-- task: CopyFiles@2
   displayName: Copy Deploy folder
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/deploy'
+    SourceFolder: '$(Build.SourcesDirectory)\deploy'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/deploy'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\deploy'
+
+- task: CopyFiles@2
+  displayName: Copy Utility
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\src\PokerLeagueManager.Utilities\bin\$(BuildConfiguration)'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\Utility'
 
 - task: PublishBuildArtifacts@1
   displayName: Run Unit Tests
